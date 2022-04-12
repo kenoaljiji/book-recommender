@@ -38,7 +38,6 @@ export const Form = styled.form`
     background-color: #fff;
   }
   input[type='search']:focus {
-    width: 90%;
     padding-left: 32px;
     color: #000;
     background-color: #fff;

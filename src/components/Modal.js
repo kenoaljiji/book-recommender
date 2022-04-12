@@ -24,9 +24,15 @@ const Modal = ({ setModal, recommended, setRecommended }) => {
           <h3>Recomended Book is</h3>
           <Image src={book?.volumeInfo?.imageLinks.thumbnail} />
           <h4>{book.volumeInfo?.title}</h4>
-          <p>{book.volumeInfo?.authors.toString()}</p>
+          <p>{book.volumeInfo.authors?.toString()}</p>
           <p>{book.volumeInfo?.pageCount}</p>
-          <a href={book.accessInfo?.webReaderLink}>Read this book online</a>
+          <a
+            href={book.accessInfo?.webReaderLink}
+            target='_blank'
+            rel='noreferrer'
+          >
+            Read this book online
+          </a>
           <Button onClick={() => onClickHandeler()}>Close</Button>
         </div>
       ) : (
