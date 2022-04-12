@@ -5,7 +5,7 @@ import spinner from '../assets/images/spinner.gif';
 const Spinner = () => {
   return (
     <StyledSpinner>
-      <img src={spinner} />
+      <img src={spinner} alt='spinner' />
     </StyledSpinner>
   );
 };
