@@ -4,18 +4,11 @@ export const Grid = styled.div`
   padding: 2rem 1rem;
   display: grid;
   justify-items: center;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   text-align: center;
 
   grid-gap: 2rem;
   grid-row-gap: 4rem;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-  }
 `;
 
 export const StyledCard = styled.div`

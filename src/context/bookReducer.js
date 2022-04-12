@@ -1,11 +1,24 @@
 const bookReducer = (state, action) => {
   switch (action.type) {
+    case 'REQUEST_GET_BOOKS':
+      return {
+        ...state,
+        books: [],
+        loading: true,
+      };
     case 'GET_BOOKS':
       const filteredBooks = action.payload?.slice(0, 10);
       return {
         ...state,
-        books: [...filteredBooks],
+        books: filteredBooks ? [...filteredBooks] : filteredBooks,
         loading: false,
+      };
+
+    case 'REQUEST_GET_BOOK':
+      return {
+        ...state,
+        book: {},
+        loading: true,
       };
     case 'GET_BOOK':
       return {
@@ -13,17 +26,7 @@ const bookReducer = (state, action) => {
         book: { ...action.payload },
         loading: false,
       };
-    case 'SET_LOADING':
-      return {
-        ...state,
-        loading: true,
-      };
-    case 'SET_MODAL':
-      return {
-        ...state,
-        modal: false,
-        loading: false,
-      };
+
     default:
       return state;
   }

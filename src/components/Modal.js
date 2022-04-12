@@ -3,21 +3,23 @@ import globalContext from '../context/globalContext';
 import { StyledModal } from '../components/styles/Modal.styled';
 import { Image } from './styles/Image.styled';
 import { Button } from './styles/Button.styled';
+import Spinner from '../components/Spinner';
 
 const Modal = ({ setModal, recommended, setRecommended }) => {
   const GlobalContext = useContext(globalContext);
 
-  const { book, books } = GlobalContext;
+  const { book, loading } = GlobalContext;
 
   const onClickHandeler = () => {
     setRecommended(false);
     setModal(false);
   };
-  console.log(book);
 
   return (
     <StyledModal>
-      {recommended ? (
+      {loading ? (
+        <Spinner />
+      ) : recommended ? (
         <div>
           <h3>Recomended Book is</h3>
           <Image src={book?.volumeInfo?.imageLinks.thumbnail} />
@@ -32,8 +34,8 @@ const Modal = ({ setModal, recommended, setRecommended }) => {
           <h3>Details</h3>
           <p>Publisher: {book.volumeInfo?.publisher} </p>
           <p>PageCount: {book.volumeInfo?.pageCount} </p>
-          <p>Avarage Rating: {book.volumeInfo?.pageCount} </p>
-          <p>Avarage Rating: {book.volumeInfo?.pageCount} </p>
+          <p>Published Date: {book.volumeInfo?.publishedDate} </p>
+          <p>Language: {book.volumeInfo?.language} </p>
           <Button variant='small' onClick={onClickHandeler}>
             Close
           </Button>

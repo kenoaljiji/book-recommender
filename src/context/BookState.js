@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import GlobalContext from './globalContext';
 import BookReducer from './bookReducer';
 import axios from 'axios';
@@ -12,13 +12,15 @@ const BookState = (props) => {
 
   const [state, dispatch] = useReducer(BookReducer, initialState);
 
-  const setLoading = () => dispatch({ type: 'SET_LOADING' });
-
   const getBooks = async (term) => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=search` + term;
 
     try {
-      setLoading();
+      dispatch({
+        type: 'REQUEST_GET_BOOKS',
+        payload: [],
+      });
+
       const res = await axios.get(url);
 
       dispatch({
@@ -34,8 +36,12 @@ const BookState = (props) => {
     const url = `https://www.googleapis.com/books/v1/volumes/${id}`;
 
     try {
+      dispatch({
+        type: 'REQUEST_GET_BOOK',
+        payload: [],
+      });
       const res = await axios.get(url);
-      console.log(res);
+
       dispatch({
         type: 'GET_BOOK',
         payload: res.data,
@@ -53,6 +59,7 @@ const BookState = (props) => {
         loading: state.loading,
         getBooks,
         getBookDetails,
+        dispatch,
       }}
     >
       {props.children}

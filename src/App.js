@@ -11,8 +11,8 @@ function App() {
       text: '#eee',
     },
     breakpoints: {
-      desktop: '1200px',
-      tablet: '992px',
+      desktop: '1280px',
+      tablet: '1200px',
       mobile: '768px',
     },
   };

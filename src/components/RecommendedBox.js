@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import ReactDom from 'react-dom';
 import globalContext from '../context/globalContext';
 import { Grid } from './styles/RecommendedBox.styled';
@@ -6,17 +6,31 @@ import { Button, ButtonContainer } from './styles/Button.styled';
 
 import Card from './Card';
 import Modal from './Modal';
+import Spinner from './Spinner';
 
 const RecommendedBox = () => {
-  const { loading, books } = useContext(globalContext);
+  const { loading, books, dispatch } = useContext(globalContext);
 
   const [modal, setModal] = useState(false);
   const [recommended, setRecommended] = useState(false);
 
   const getRecommended = () => {
+    getRecomendedBook();
     setRecommended(true);
     setModal(true);
   };
+
+  const getRecomendedBook = useCallback(() => {
+    const newBooks = books.slice();
+    const randomBook = newBooks[Math.floor(Math.random() * newBooks.length)];
+
+    dispatch({
+      type: 'GET_BOOK',
+      payload: randomBook,
+    });
+
+    return randomBook;
+  }, [books, dispatch]);
 
   return (
     <>
@@ -30,8 +44,8 @@ const RecommendedBox = () => {
       </ButtonContainer>
 
       <Grid>
-        {loading ? (
-          <p>...Loading</p>
+        {loading && books.length === 0 ? (
+          <Spinner />
         ) : (
           books?.map((item) => (
             <Card book={item} key={item.id} setModal={setModal} />

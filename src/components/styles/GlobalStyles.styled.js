@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+
+
   
   *,
     ::after,
@@ -18,7 +20,6 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     box-sizing: border-box;
-    font-family: 'Cormorant Infant', sans-serif;
     font-weight: 300;
     background: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.text};
